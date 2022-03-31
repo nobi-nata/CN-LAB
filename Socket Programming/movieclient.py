@@ -21,6 +21,11 @@ print(client.recv(SIZE).decode(FORMAT))
 #enter the name
 name = input()
 client.send(name.encode(FORMAT))
+#choose date
+print(client.recv(SIZE).decode(FORMAT))
+#enter the date
+date = input()
+client.send(date.encode(FORMAT))
 #choose place
 print(client.recv(SIZE).decode(FORMAT))
 choice1 = input()
@@ -35,15 +40,21 @@ choice3 = input()
 client.send(choice3.encode(FORMAT))
 #no of seats
 print(client.recv(SIZE).decode(FORMAT))
-print(client.recv(SIZE).decode(FORMAT))
+avai_seat = client.recv(SIZE).decode(FORMAT)
+print(avai_seat)
+# print(type(avai_seat))
 # print(client.recv(SIZE).decode(FORMAT))
 # no of seats
 
 choice4 = input()
 client.send(choice4.encode(FORMAT))
+if choice4.isnumeric()== False:
+    print(client.recv(SIZE).decode(FORMAT))
+    choice4 = input()
+    client.send(choice4.encode(FORMAT))
 
 choice5 = -1
-while((int(choice4) < 0 or int(choice4) > 100)and(int(choice5) < 0 or int(choice5) > 100)):
+while((str(choice4) < '0' or str(choice4) > avai_seat)and(str(choice5) < '0' or str(choice5) > avai_seat)):
     print(client.recv(SIZE).decode(FORMAT))
     choice5 = input()
     client.send(choice5.encode(FORMAT))
